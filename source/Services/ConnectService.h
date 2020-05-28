@@ -9,9 +9,9 @@
 
 #ifndef CLIENT_CONNECTSERVICE_H
 
-void connectToServer(SOCKET clientSocket);
+void connectToServer(SOCKET * clientSocket);
 
-void dissconnetFromServer(SOCKET socket);
+void disconnetFromServer(const SOCKET * clientSocket);
 
 #define CLIENT_CONNECTSERVICE_H
 
