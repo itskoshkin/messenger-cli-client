@@ -12,17 +12,16 @@
  */
 bool doAuth(SOCKET *clientSocket) {
     printf("do you want to signup or to signin?");
-    char *choice;
+    char choice[10];
     do {
-        scanf("%s", choice);
-    } while (strcmp(choice, "signip") || strcmp(choice, "signin"));
-
+        fgets(choice, 10, stdin);
+    } while (strcmp(choice, "signup") || strcmp(choice, "signin"));
     printf("Provide your login\n");
-    char *login;
-    scanf("%s", login);
+    char login[30];
+    fgets(login, 30, stdin);
     printf("Provide your password\n");
-    char *password;
-    scanf("%s", password);
+    char password[30];
+    fgets(password, 30, stdin);
 
 
     return false;
