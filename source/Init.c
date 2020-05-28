@@ -1,8 +1,7 @@
-#include <winsock.h>
+#include <winsock2.h>
 #include <stdio.h>
 #include "Services/TimeService.h"
-#include "Services/MessageService.h"
-#include "Services/ConnectService.h"
+#include "Services/RunService.h"
 
 
 int main() {
@@ -11,11 +10,7 @@ int main() {
         printf("[%s] Can't connect to socket lib", getCurrentTime());
         return 1;
     }
-
-    SOCKET socket;
-    connectToServer(socket);
-    sendingMessage(socket);
-    dissconnetFromServer(socket);
+    run();
 
     return 0;
 }
