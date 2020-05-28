@@ -9,8 +9,8 @@
 
 #ifndef CLIENT_MESSAGESERVICE_H
 
-void sendingMessage(SOCKET clientSocket);
+void sendingMessage(SOCKET * clientSocket);
 
 #define CLIENT_MESSAGESERVICE_H
 
-#endif //CLIENT_MESSAGESERVICE_H
+#endif
