@@ -25,12 +25,12 @@ bool doAuth(SOCKET *clientSocket) {
     char password[32];
     scanf("%32s", password);
 
-    char *message;
+    char message[1024];
 
     if (strstr(choice, "signup")) {
-        sprintf(message, "%d:%s:%s", 1, login, password);
+        sprintf(message, "%d:%s:%s%c", 1, login, password, '\0');
     } else {
-        sprintf(message, "%d:%s:%s", 0, login, password);
+        sprintf(message, "%d:%s:%s%c", 0, login, password, '\0');
     }
 
     int ret = send(*clientSocket, message, sizeof(message), 0);
@@ -40,10 +40,16 @@ bool doAuth(SOCKET *clientSocket) {
         exit(EXIT_FAILURE);
     }
 
-    char recieve[1];
+    char recieve[1024];
     ret = recv(clientSocket, recieve, 1024, 0);
-
-    //TODO parse message return true
-
+    if (ret == SOCKET_ERROR) {
+        printf("[%s] ERROR: Error receive data\n", getCurrentTime());
+        exit(EXIT_FAILURE);
+    }
+    if(recieve[0] == '1'){
+        printf("Connected.\n");
+        return true;
+    }
+    printf("Can't connect to the server. Please try again\n");
     return false;
 }
