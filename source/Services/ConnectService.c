@@ -24,7 +24,7 @@ void connectToServer(SOCKET * clientSocket) {
     if (connect(*clientSocket, (struct sockaddr *) &serverSockaddr_in, sizeof(serverSockaddr_in)) == SOCKET_ERROR) {
         printf("[%s] Can't connect to server\n", getCurrentTime());
         closesocket(*clientSocket);
-        return;
+        exit(EXIT_FAILURE);
     }
 
 }

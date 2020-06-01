@@ -3,16 +3,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <winsock2.h>
 
-bool doAuth(SOCKET *clientSocket) {
+bool doAuth(const SOCKET *clientSocket) {
     char *choice = (char *) calloc(8, sizeof(char));
 
     do {
         printf("Do you want to signup or to signin?\n");
         scanf("%s", choice);
     } while (strcmp(choice, "signup") && strcmp(choice, "signin"));
-
 
 
     printf("Provide your login (less than 32 characters)\n");
@@ -40,16 +38,17 @@ bool doAuth(SOCKET *clientSocket) {
         exit(EXIT_FAILURE);
     }
 
-    char recieve[1024];
-    ret = recv(clientSocket, recieve, 1024, 0);
+    char receive[1024];
+
+    ret = recv(*clientSocket, receive, 1024, 0);
     if (ret == SOCKET_ERROR) {
         printf("[%s] ERROR: Error receive data\n", getCurrentTime());
         exit(EXIT_FAILURE);
     }
-    if(recieve[0] == '1'){
-        printf("Connected.\n");
+    if (receive[0] == '1') {
+        printf("[%s] INFO: Connected.\n", getCurrentTime());
         return true;
     }
-    printf("Can't connect to the server. Please try again\n");
+    printf("[%s] WARN: Can't connect to the server. Please try again\n", getCurrentTime());
     return false;
 }

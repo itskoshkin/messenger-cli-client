@@ -8,8 +8,9 @@ int main() {
     WSADATA wsd;
     if (WSAStartup(MAKEWORD(1, 1), &wsd) != 0) {
         printf("[%s] Can't connect to socket lib\n", getCurrentTime());
-        return 1;
+        exit(EXIT_FAILURE);
     }
+
     run();
 
     return 0;
