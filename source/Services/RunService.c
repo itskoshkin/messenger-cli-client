@@ -7,7 +7,7 @@
 void run() {
     SOCKET socket;
     connectToServer(&socket);
-    bool isAuthenticated = false;
+    bool isAuthenticated;
     do {
         isAuthenticated = doAuth(&socket);
     } while (isAuthenticated);

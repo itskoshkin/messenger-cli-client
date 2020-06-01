@@ -46,7 +46,7 @@ bool doAuth(const SOCKET *clientSocket) {
         exit(EXIT_FAILURE);
     }
     if (receive[0] == '1') {
-        printf("[%s] INFO: Connected.\n", getCurrentTime());
+        printf("[%s] INFO: Connected to server was successful\n", getCurrentTime());
         return true;
     }
     printf("[%s] WARN: Can't connect to the server. Please try again\n", getCurrentTime());
