@@ -8,11 +8,6 @@
 
 #define PORT 8080
 
-/** TODO FIXME
- * добавить авторизацию и регистрацию
- * добавить обработку нажатия клавиши для выхода из чата
- */
-
 char *username = "User";
 
 void messageHandler(SOCKET *clientSocket) {
