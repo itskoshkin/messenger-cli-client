@@ -3,11 +3,13 @@
 #include "MessageService.h"
 #include "ConnectService.h"
 #include "AuthService.h"
+#include "TimeService.h"
 
 void run() {
     SOCKET socket;
     connectToServer(&socket);
     bool isAuthenticated;
+    printf("[%s] INFO: Connection to the server was successful\n", getCurrentTime());
     do {
         isAuthenticated = doAuth(&socket);
     } while (isAuthenticated);

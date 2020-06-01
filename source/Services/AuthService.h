@@ -3,7 +3,7 @@
 
 #ifndef CLIENT_AUTHSERVICE_H
 
-bool doAuth(const SOCKET *clientSocket);
+bool doAuth(SOCKET *clientSocket);
 
 #define CLIENT_AUTHSERVICE_H
 

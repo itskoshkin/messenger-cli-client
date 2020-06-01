@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-bool doAuth(const SOCKET *clientSocket) {
+bool doAuth(SOCKET *clientSocket) {
     char *choice = (char *) calloc(8, sizeof(char));
 
     do {
@@ -41,6 +41,7 @@ bool doAuth(const SOCKET *clientSocket) {
     char receive[1024];
 
     ret = recv(*clientSocket, receive, 1024, 0);
+
     if (ret == SOCKET_ERROR) {
         printf("[%s] ERROR: Error receive data\n", getCurrentTime());
         exit(EXIT_FAILURE);

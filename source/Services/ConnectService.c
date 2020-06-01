@@ -13,7 +13,7 @@ void connectToServer(SOCKET * clientSocket) {
 
     if (*clientSocket == INVALID_SOCKET) {
         printf("[%s] ERROR: Error create socket\n", getCurrentTime());
-        return;
+        exit(EXIT_FAILURE);
     }
 
     struct sockaddr_in serverSockaddr_in;
