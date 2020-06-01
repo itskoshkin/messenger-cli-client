@@ -34,7 +34,7 @@ bool doAuth(SOCKET *clientSocket) {
     int ret = send(*clientSocket, message, sizeof(message), 0);
 
     if (ret == SOCKET_ERROR) {
-        printf("[%s] ERROR: Error sending data\n", getCurrentTime());
+        printf("[%s] ERROR: Error sending data to server\n", getCurrentTime());
         exit(EXIT_FAILURE);
     }
 
@@ -43,13 +43,15 @@ bool doAuth(SOCKET *clientSocket) {
     ret = recv(*clientSocket, receive, 1024, 0);
 
     if (ret == SOCKET_ERROR) {
-        printf("[%s] ERROR: Error receive data\n", getCurrentTime());
+        printf("[%s] ERROR: Error receive data from server\n", getCurrentTime());
         exit(EXIT_FAILURE);
     }
+
     if (receive[0] == '1') {
         printf("[%s] INFO: Connected to server was successful\n", getCurrentTime());
         return true;
+    } else {
+        printf("[%s] INFO: Login or password isn't match or already occupied, please try again\n", getCurrentTime());
+        return false;
     }
-    printf("[%s] WARN: Can't connect to the server. Please try again\n", getCurrentTime());
-    return false;
 }
