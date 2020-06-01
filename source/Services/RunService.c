@@ -13,7 +13,7 @@ void run() {
     do {
         isAuthenticated = doAuth(&socket);
     } while (!isAuthenticated);
-    sendingMessage(&socket);
+    messageHandler(&socket);
     disconnetFromServer(&socket);
 }
 

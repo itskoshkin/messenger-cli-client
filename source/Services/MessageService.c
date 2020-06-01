@@ -15,14 +15,10 @@
 
 char *username = "User";
 
-void sendingMessage(SOCKET * clientSocket) {
+void messageHandler(SOCKET *clientSocket) {
 
     char message[1024];
 
-    /*
-    printf("Enter your username: ");
-    scanf("&s\n", username);
-    */
 
     while (true) {
         char text[512];

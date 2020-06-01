@@ -9,7 +9,7 @@
 
 #ifndef CLIENT_MESSAGESERVICE_H
 
-void sendingMessage(SOCKET * clientSocket);
+void messageHandler(SOCKET *clientSocket);
 
 #define CLIENT_MESSAGESERVICE_H
 
