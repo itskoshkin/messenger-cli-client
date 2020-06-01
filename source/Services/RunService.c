@@ -12,7 +12,7 @@ void run() {
     printf("[%s] INFO: Connection to the server was successful\n", getCurrentTime());
     do {
         isAuthenticated = doAuth(&socket);
-    } while (isAuthenticated);
+    } while (!isAuthenticated);
     sendingMessage(&socket);
     disconnetFromServer(&socket);
 }
