@@ -2,54 +2,63 @@
  * @authors Stanislav Stoianov, Daria Pavlova
  */
 
+#include <pthread.h>
 #include "MessageService.h"
 #include "TimeService.h"
 #include "stdbool.h"
 
-#define PORT 8080
+pthread_mutex_t mutex;
+
+void *sendThread(void *param);
+
+_Noreturn void *recvThread(void *param);
+
+/**
+ * TODO forward username to variable
+ */
 
 char *username = "User";
 
+/**
+ * FIXME IMPORTANT test functions
+ * @param clientSocket
+ */
+
 void messageHandler(SOCKET *clientSocket) {
+    pthread_t send_thread_id;
+    pthread_t recv_thread_id;
 
+    pthread_create(&send_thread_id, NULL, sendThread, (void *) &clientSocket);
+    pthread_detach(send_thread_id);
+
+    pthread_create(&recv_thread_id, NULL, recvThread, (void *) &clientSocket);
+    pthread_join(recv_thread_id, NULL);
+
+    pthread_exit(NULL);
+}
+
+_Noreturn void *sendThread(void *param) {
+    SOCKET clientSocket = (SOCKET) param;
     char message[1024];
-
-
+    char text[992];
     while (true) {
-        char text[512];
-        printf("New message: ");
+        printf(">: ");
         scanf("%s", text);
-
-        sprintf(message, "[%s] %s: %s", getCurrentTime(), username, text);
-        int ret = send(*clientSocket, message, strlen(message), 0);
-
-        if (ret == SOCKET_ERROR) {
+        sprintf(message, "%s: %s", username, text);
+        if (send(clientSocket, message, 1024, 0) == SOCKET_ERROR) {
             printf("Can't send message\n");
-            closesocket(*clientSocket);
-            return;
-        }
-        printf("The message was successfully sent\n");
-        printf("%s\n", message);
-        ret = SOCKET_ERROR;
-
-        //TODO WHAT IS IT
-        while (ret == SOCKET_ERROR) {
-            //полчение ответа
-            ret = recv(*clientSocket, message, 1024, 0);
-            //обработка ошибок
-            if (ret == 0 || ret == WSAECONNRESET) {
-                printf("[%s] Connection closed\n", getCurrentTime());
-                break;
-            }
-            if (ret < 0) {
-                //printf("Can't resieve message\n");
-                /*closesocket(clientSocket);
-                return;*/
-                continue;
-            }
-            //вывод на экран количества полученных байт и сообщение
-            //printf("[%s] Receive: %s, includes %d bytes\n", getCurrentTime(), message, ret);
+            closesocket(clientSocket);
         }
     }
+}
 
+_Noreturn void *recvThread(void *param) {
+    SOCKET clientSocket = (SOCKET) param;
+    char receive[1024];
+    while (1) {
+        recv(clientSocket, receive, 1024, 0);
+        pthread_mutex_lock(&mutex);
+        printf("%s", receive);
+        pthread_mutex_unlock(&mutex);
+    }
 }
