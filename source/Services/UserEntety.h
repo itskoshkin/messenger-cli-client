@@ -5,13 +5,13 @@
 //TODO
 
 #ifndef CLIENT_USERENTETY_H
-struct User {
+struct {
     char *name;
 } User;
 
-void getName(char *name);
+void setName(char *name);
 
-char *setName();
+char *getName();
 
 #define CLIENT_USERENTETY_H
 

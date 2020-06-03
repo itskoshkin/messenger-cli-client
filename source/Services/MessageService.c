@@ -19,7 +19,7 @@ void *recvThread(void *param);
  * TODO FIXME forward username to variable
  */
 
-char *username = setName();
+//char *username = setName();
 
 /**
  * FIXME IMPORTANT test functions
@@ -47,7 +47,7 @@ void *sendThread(void *param) {
     char text[992];
     while (true) {
         scanf("%s", text);
-        sprintf(message, "%s: %s", username, text);
+        sprintf(message, "%s: %s", User.name, text);
         if (send(clientSocket, message, 1024, 0) == SOCKET_ERROR) {
             printf("[%s] ERROR: Can't send a message, connection will be closing\n",
                    getCurrentTime());

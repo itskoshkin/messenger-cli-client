@@ -55,7 +55,7 @@ bool doAuth(SOCKET *clientSocket) {
     if (receive[0] == '1') {
         printf("[%s] INFO: Connected to server was successful\n", getCurrentTime());
         //FIXME
-        getName(login);
+        setName(login);
         return true;
     } else {
         printf("[%s] INFO: Login or password isn't match or already occupied, please try again\n", getCurrentTime());

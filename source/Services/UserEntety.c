@@ -7,11 +7,11 @@
 
 //TODO FIXME
 
-void getName(char *name) {
-    struct User = (struct User) malloc(sizeof(struct User));
+void setName(char *name) {
+     //User *User= ( struct User*) malloc(sizeof(struct User));
     User.name = name;
 }
 
-char *setName() {
+char *getName() {
     return User.name;
 }
