@@ -1,3 +1,7 @@
+/**
+ * @authors Stanislav Stoianov, Sergey Boryaev
+ */
+
 #include <winsock2.h>
 #include "stdbool.h"
 #include "MessageService.h"

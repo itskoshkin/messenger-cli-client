@@ -1,3 +1,7 @@
+/**
+ * @authors Stanislav Stoianov,
+ */
+
 #ifndef CLIENT_RUNSERVICE_H
 
 void run();

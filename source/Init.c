@@ -1,3 +1,7 @@
+/**
+ * @authors Stanislav Stoianov
+ */
+
 #include <winsock2.h>
 #include <stdio.h>
 #include "Services/TimeService.h"

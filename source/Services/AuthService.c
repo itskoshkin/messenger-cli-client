@@ -1,3 +1,7 @@
+/**
+ * @authors Stanislav Stoianov, Sergey Boryaev
+ */
+
 #include "AuthService.h"
 #include "TimeService.h"
 #include <stdio.h>

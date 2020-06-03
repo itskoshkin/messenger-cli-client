@@ -8,4 +8,4 @@ char * getCurrentTime();
 
 #define CLIENT_TIMESERVICE_H
 
-#endif //CLIENT_TIMESERVICE_H
+#endif

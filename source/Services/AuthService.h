@@ -1,3 +1,7 @@
+/**
+ * @authors Stanislav Stoianov,
+ */
+
 #include <stdbool.h>
 #include <winsock2.h>
 
