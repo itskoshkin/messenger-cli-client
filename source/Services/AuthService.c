@@ -4,6 +4,7 @@
 
 #include "AuthService.h"
 #include "TimeService.h"
+#include "UserEntety.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -53,6 +54,8 @@ bool doAuth(SOCKET *clientSocket) {
 
     if (receive[0] == '1') {
         printf("[%s] INFO: Connected to server was successful\n", getCurrentTime());
+        //FIXME
+        getName(login);
         return true;
     } else {
         printf("[%s] INFO: Login or password isn't match or already occupied, please try again\n", getCurrentTime());

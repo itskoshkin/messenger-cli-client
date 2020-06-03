@@ -5,26 +5,28 @@
 #include <pthread.h>
 #include "MessageService.h"
 #include "TimeService.h"
+#include "UserEntety.h"
 #include "stdbool.h"
 
 pthread_mutex_t mutex;
 
 void *sendThread(void *param);
 
-_Noreturn void *recvThread(void *param);
+void *recvThread(void *param);
+
 
 /**
- * TODO forward username to variable
+ * TODO FIXME forward username to variable
  */
 
-char *username = "User";
+char *username = setName();
 
 /**
  * FIXME IMPORTANT test functions
  * @param clientSocket
  */
 
-void messageHandler(SOCKET *clientSocket) {
+void *messageHandler(SOCKET *clientSocket) {
     pthread_t send_thread_id;
     pthread_t recv_thread_id;
 
@@ -35,28 +37,34 @@ void messageHandler(SOCKET *clientSocket) {
     pthread_join(recv_thread_id, NULL);
 
     pthread_exit(NULL);
+
+    return (void *) 2;
 }
 
-_Noreturn void *sendThread(void *param) {
+void *sendThread(void *param) {
     SOCKET clientSocket = (SOCKET) param;
     char message[1024];
     char text[992];
     while (true) {
-        printf(">: ");
         scanf("%s", text);
         sprintf(message, "%s: %s", username, text);
         if (send(clientSocket, message, 1024, 0) == SOCKET_ERROR) {
-            printf("Can't send message\n");
-            closesocket(clientSocket);
+            printf("[%s] ERROR: Can't send a message, connection will be closing\n",
+                   getCurrentTime());
+            return (void *) 2;
         }
     }
 }
 
-_Noreturn void *recvThread(void *param) {
+void *recvThread(void *param) {
     SOCKET clientSocket = (SOCKET) param;
     char receive[1024];
-    while (1) {
-        recv(clientSocket, receive, 1024, 0);
+    while (true) {
+        if (recv(clientSocket, receive, 1024, 0)) {
+            printf("[%s] ERROR: Can't receive a message, connection will be closing\n",
+                   getCurrentTime());
+            return (void *) 2;
+        }
         pthread_mutex_lock(&mutex);
         printf("%s", receive);
         pthread_mutex_unlock(&mutex);
