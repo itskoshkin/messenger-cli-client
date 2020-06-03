@@ -1,5 +1,5 @@
 /**
- * @authors Stanislav Stoianov, Sergey Boryaev
+ * @authors Stanislav Stoianov, Sergey Boryaev, Darya Pavlova
  */
 
 #include "AuthService.h"
@@ -54,7 +54,6 @@ bool doAuth(SOCKET *clientSocket) {
 
     if (receive[0] == '1') {
         printf("[%s] INFO: Connected to server was successful\n", getCurrentTime());
-        //FIXME
         setName(login);
         return true;
     } else {

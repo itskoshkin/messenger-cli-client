@@ -1,5 +1,5 @@
 /**
- * @authors Stanislav Stoianov,
+ * @authors Stanislav Stoianov, Darya Pavlova
  */
 
 #include <pthread.h>
@@ -14,17 +14,6 @@ void *sendThread(void *param);
 
 void *recvThread(void *param);
 
-
-/**
- * TODO FIXME forward username to variable
- */
-
-//char *username = getName();
-
-/**
- * FIXME IMPORTANT test functions
- * @param clientSocket
- */
 
 void *messageHandler(SOCKET *clientSocket) {
     pthread_t send_thread_id;
@@ -43,9 +32,7 @@ void *messageHandler(SOCKET *clientSocket) {
 
 void *sendThread(void *param) {
     SOCKET clientSocket = (SOCKET) param;
-    char message[1024];
-    char text[992];
-    char *username = User.name;
+    char message[1024], text[992], *username = User.name;
     while (true) {
         scanf("%s", text);
         sprintf(message, "%s: %s", username, text);
