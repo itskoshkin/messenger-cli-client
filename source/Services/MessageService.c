@@ -51,7 +51,7 @@ void *recvThread(void *param) {
         if (recv(clientSocket, receive, 1024, 0)) {
             printf("[%s] ERROR: Can't receive a message, connection will be closing\n",
                    getCurrentTime());
-            return (void *) 2;
+            exit(EXIT_FAILURE);
         }
         pthread_mutex_lock(&mutex);
         printf("%s", receive);
