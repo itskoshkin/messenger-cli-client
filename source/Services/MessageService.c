@@ -12,7 +12,7 @@ pthread_mutex_t mutex;
 
 void *sendThread(void *param);
 
-void *recvThread(void *param);
+_Noreturn void *recvThread(void *param);
 
 
 void *messageHandler(SOCKET *clientSocket) {
@@ -44,15 +44,12 @@ void *sendThread(void *param) {
     }
 }
 
-void *recvThread(void *param) {
+_Noreturn void *recvThread(void *param) {
     SOCKET clientSocket = (SOCKET) param;
     char receive[1024];
     while (true) {
         if (recv(clientSocket, receive, 1024, 0) == SOCKET_ERROR) {
             continue;
-            printf("[%s] ERROR: Can't receive a message, connection will be closing\n",
-                   getCurrentTime());
-            exit(EXIT_FAILURE);
         }
         pthread_mutex_lock(&mutex);
         printf("%s", receive);
