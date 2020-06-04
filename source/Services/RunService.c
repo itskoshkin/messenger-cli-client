@@ -17,8 +17,6 @@ void run() {
     do {
         isAuthenticated = doAuth(&socket);
     } while (!isAuthenticated);
-    char receive[1024];
-
     messageHandler(socket);
     disconnetFromServer(&socket);
 }
