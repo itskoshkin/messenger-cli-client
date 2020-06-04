@@ -17,6 +17,11 @@ void run() {
     do {
         isAuthenticated = doAuth(&socket);
     } while (!isAuthenticated);
+    char receive[1024];
+    recv(socket, receive, 1024, 0);
+    printf("%s", receive);
+    recv(socket, receive, 1024, 0);
+    printf("%s", receive);
     messageHandler(&socket);
     disconnetFromServer(&socket);
 }

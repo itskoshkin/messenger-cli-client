@@ -39,7 +39,7 @@ void *sendThread(void *param) {
         if (send(clientSocket, message, 1024, 0) == SOCKET_ERROR) {
             printf("[%s] ERROR: Can't send a message, connection will be closing\n",
                    getCurrentTime());
-            return (void *) 2;
+            exit(EXIT_FAILURE);
         }
     }
 }
@@ -48,7 +48,8 @@ void *recvThread(void *param) {
     SOCKET clientSocket = (SOCKET) param;
     char receive[1024];
     while (true) {
-        if (recv(clientSocket, receive, 1024, 0)) {
+        if (recv(clientSocket, receive, 1024, 0) == SOCKET_ERROR) {
+            continue;
             printf("[%s] ERROR: Can't receive a message, connection will be closing\n",
                    getCurrentTime());
             exit(EXIT_FAILURE);
