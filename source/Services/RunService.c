@@ -18,11 +18,8 @@ void run() {
         isAuthenticated = doAuth(&socket);
     } while (!isAuthenticated);
     char receive[1024];
-    recv(socket, receive, 1024, 0);
-    printf("%s", receive);
-    recv(socket, receive, 1024, 0);
-    printf("%s", receive);
-    messageHandler(&socket);
+
+    messageHandler(socket);
     disconnetFromServer(&socket);
 }
 

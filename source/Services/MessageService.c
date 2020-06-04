@@ -19,10 +19,10 @@ void *messageHandler(SOCKET *clientSocket) {
     pthread_t send_thread_id;
     pthread_t recv_thread_id;
 
-    pthread_create(&send_thread_id, NULL, sendThread, (void *) &clientSocket);
+    pthread_create(&send_thread_id, NULL, sendThread, (void *) clientSocket);
     pthread_detach(send_thread_id);
 
-    pthread_create(&recv_thread_id, NULL, recvThread, (void *) &clientSocket);
+    pthread_create(&recv_thread_id, NULL, recvThread, (void *) clientSocket);
     pthread_join(recv_thread_id, NULL);
 
     pthread_exit(NULL);
