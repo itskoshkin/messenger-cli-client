@@ -48,9 +48,7 @@ _Noreturn void *recvThread(void *param) {
     SOCKET clientSocket = (SOCKET) param;
     char receive[1024];
     while (true) {
-        if (recv(clientSocket, receive, 1024, 0) == SOCKET_ERROR) {
-            continue;
-        }
+        if (recv(clientSocket, receive, 1024, 0) == SOCKET_ERROR) continue;
         pthread_mutex_lock(&mutex);
         printf("%s", receive);
         pthread_mutex_unlock(&mutex);
