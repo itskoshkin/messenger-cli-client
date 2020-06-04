@@ -35,7 +35,7 @@ void *sendThread(void *param) {
     char message[1024], text[992], *username = User.name;
     while (true) {
         scanf("%s", text);
-        sprintf(message, "%s: %s", username, text);
+        sprintf(message, "%s: %s\n", username, text);
         if (send(clientSocket, message, 1024, 0) == SOCKET_ERROR) {
             printf("[%s] ERROR: Can't send a message, connection will be closing\n",
                    getCurrentTime());
